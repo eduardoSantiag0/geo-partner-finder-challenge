@@ -1,6 +1,7 @@
 package com.eduardoSantiag0.ze_code.application;
 
 
+import com.eduardoSantiag0.ze_code.application.port.in.PartnerUseCase;
 import com.eduardoSantiag0.ze_code.application.services.PartnerService;
 import com.eduardoSantiag0.ze_code.infra.dtos.CreatePartnerDTO;
 import com.eduardoSantiag0.ze_code.infra.dtos.PartnerResponseDTO;
@@ -16,36 +17,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/partners")
 public class PartnerController {
 
-  private final PartnerService partnerService;
+    private final PartnerUseCase partnerService;
 
-  public PartnerController(PartnerService partnerService) {
-    this.partnerService = partnerService;
-  }
+    public PartnerController(PartnerUseCase partnerService) {
+        this.partnerService = partnerService;
+    }
 
-  @PostMapping
-  public ResponseEntity<String> createPartner(@RequestBody CreatePartnerDTO dto) {
-    String response = partnerService.createPartner(dto);
-    return ResponseEntity.ok(response);
-  }
-
-
-  @GetMapping("/{id}")
-  public ResponseEntity<PartnerResponseDTO> getById(@PathVariable Long id) {
-    var response = partnerService.findById(id);
-    return ResponseEntity.ok(response);
-  }
+    @PostMapping
+    public ResponseEntity<String> createPartner(
+            @RequestBody CreatePartnerDTO dto) {
+        String response = partnerService.createPartner(dto);
+        return ResponseEntity.ok(response);
+    }
 
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PartnerResponseDTO> getById(@PathVariable Long id) {
+        var response = partnerService.findById(id);
+        return ResponseEntity.ok(response);
+    }
 
-  @GetMapping("/{lat}/{lon}")
-  public ResponseEntity<PartnerResponseDTO> findNearestPartner(
-      @PathVariable double lat,
-      @PathVariable double lon
-  ) {
-    PartnerResponseDTO response = partnerService.findNearest(lat, lon);
-    return ResponseEntity.ok(response);
-  }
 
+    @GetMapping("/{lat}/{lon}")
+    public ResponseEntity<PartnerResponseDTO> findNearestPartner(
+            @PathVariable double lat,
+            @PathVariable double lon
+    ) {
+        PartnerResponseDTO response = partnerService.findNearest(lat, lon);
+        return ResponseEntity.ok(response);
+    }
 
 
 }

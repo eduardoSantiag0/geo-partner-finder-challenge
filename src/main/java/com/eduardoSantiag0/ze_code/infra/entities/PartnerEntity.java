@@ -11,8 +11,6 @@ import org.locationtech.jts.geom.Point;
 
 @Entity
 @Table(name = "partners")
-//@NoArgsConstructor
-//@AllArgsConstructor
 public class PartnerEntity {
 
   public PartnerEntity() {
@@ -32,26 +30,20 @@ public class PartnerEntity {
   private Long id;
 
   @Column(name = "trading_name", nullable = false)
-  @Getter
   private String tradingName;
 
   @Column(name = "owner_name", nullable = false)
-  @Getter
   private String ownerName;
 
   @Column(name = "document", nullable = false, unique = true)
-  @Getter
   private String document;
 
-
   @Column(name = "coverage_area", columnDefinition = "GEOMETRY(MultiPolygon, 4326)", nullable = false)
-  @Getter
   private MultiPolygon coverageArea;
 
-
   @Column(name = "address", columnDefinition = "GEOMETRY(Point, 4326)", nullable = false)
-  @Getter
   private Point address;
+
 
   public Long getId() {
     return id;

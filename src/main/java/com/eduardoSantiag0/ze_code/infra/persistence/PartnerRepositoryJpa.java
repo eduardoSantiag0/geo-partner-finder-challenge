@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PartnerRepository extends JpaRepository<PartnerEntity, Long> {
+public interface PartnerRepositoryJpa extends JpaRepository<PartnerEntity, Long> {
   @Query(value = """
       WITH q AS (
         SELECT ST_SetSRID(ST_MakePoint(:lat, :lon), 4326) AS pt
