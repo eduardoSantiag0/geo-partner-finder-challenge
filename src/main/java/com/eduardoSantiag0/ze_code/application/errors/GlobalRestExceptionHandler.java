@@ -38,7 +38,7 @@ public class GlobalRestExceptionHandler {
     public ResponseEntity<String> handleNoPartnerCloseEnoughException
             (NoPartnerCloseEnoughException ex) {
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
+                .status(HttpStatus.NOT_FOUND)
                 .body(ex.getMessage());
     }
 
