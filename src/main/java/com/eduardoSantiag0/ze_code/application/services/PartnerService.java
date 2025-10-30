@@ -1,5 +1,6 @@
 package com.eduardoSantiag0.ze_code.application.services;
 
+import com.eduardoSantiag0.ze_code.application.errors.DuplicateIdException;
 import com.eduardoSantiag0.ze_code.application.errors.InvalidCredentialsException;
 import com.eduardoSantiag0.ze_code.application.errors.NoPartnerCloseEnoughException;
 import com.eduardoSantiag0.ze_code.application.errors.PartnerNotFoundException;
@@ -30,6 +31,14 @@ public class PartnerService implements PartnerUseCase {
         if (dto.address() == null) {
             throw new InvalidCredentialsException("Address coordinates are required");
         }
+
+        if (repository.existsById(dto.id())) {
+            throw new DuplicateIdException("Id already registered");
+        }
+        if (repository.existsByDocument(dto.document())) {
+            throw new DuplicateIdException("Document already registered");
+        }
+
     }
 
     @Override

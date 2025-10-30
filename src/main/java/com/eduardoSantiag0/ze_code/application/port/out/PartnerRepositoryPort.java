@@ -8,4 +8,7 @@ public interface PartnerRepositoryPort {
   void save (PartnerEntity entity);
   Optional<PartnerEntity> findById(Long id);
   Optional<PartnerEntity> findWithin(double lat, double lon);
+
+    boolean existsById(Long id);
+    boolean existsByDocument(String document);
 }

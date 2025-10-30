@@ -1,8 +1,7 @@
-package com.eduardoSantiag0.ze_code.application;
+package com.eduardoSantiag0.ze_code.adapter.in;
 
 
 import com.eduardoSantiag0.ze_code.application.port.in.PartnerUseCase;
-import com.eduardoSantiag0.ze_code.application.services.PartnerService;
 import com.eduardoSantiag0.ze_code.infra.dtos.CreatePartnerDTO;
 import com.eduardoSantiag0.ze_code.infra.dtos.PartnerResponseDTO;
 import org.springframework.http.ResponseEntity;

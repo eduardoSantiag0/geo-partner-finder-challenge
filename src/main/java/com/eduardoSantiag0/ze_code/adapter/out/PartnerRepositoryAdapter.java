@@ -29,4 +29,14 @@ public class PartnerRepositoryAdapter implements PartnerRepositoryPort {
     public Optional<PartnerEntity> findWithin(double lat, double lon) {
         return jpa.findWithin(lat, lon);
     }
+
+    @Override
+    public boolean existsById(Long id) {
+        return jpa.existsById(id);
+    }
+
+    @Override
+    public boolean existsByDocument(String document) {
+        return jpa.existsByDocument(document);
+    }
 }

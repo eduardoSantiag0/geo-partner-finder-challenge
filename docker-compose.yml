@@ -1,34 +1,42 @@
+version: '3.8'
+
 services:
     app:
         build: .
+        container_name: geo-partner-finder-app
         ports:
             - "8080:8080"
         depends_on:
-            postgres:
+            postgis:
                 condition: service_healthy
         environment:
-            SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5433/geo-partner-finder
+            SPRING_DATASOURCE_URL: jdbc:postgresql://postgis:5432/geo-partner-finder
             SPRING_DATASOURCE_USERNAME: postgres
             SPRING_DATASOURCE_PASSWORD: password
+            SPRING_JPA_HIBERNATE_DDL_AUTO: update
+            SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.spatial.dialect.postgis.PostgisDialect
         networks:
             - app-network
 
-    postgres:
-        image: postgres:16-alpine
+    postgis:
+        image: postgis/postgis:16-3.4
+        container_name: geo-partner-finder-db
+        restart: always
         ports:
             - "5433:5432"
         environment:
-            - POSTGRES_DB=geo-partner-finder
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=password
-        networks:
-            - app-network
+            POSTGRES_DB: geo-partner-finder
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
         healthcheck:
-            test: [ "CMD-SHELL", "pg_isready -U postgres -d btg-order-reporting" ]
+            test: [ "CMD-SHELL", "pg_isready -U postgres -d geo-partner-finder" ]
             interval: 5s
             timeout: 5s
             retries: 5
             start_period: 10s
+        networks:
+            - app-network
+
 networks:
     app-network:
         driver: bridge
