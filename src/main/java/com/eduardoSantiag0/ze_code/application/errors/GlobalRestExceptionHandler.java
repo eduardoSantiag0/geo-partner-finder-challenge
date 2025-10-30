@@ -42,4 +42,21 @@ public class GlobalRestExceptionHandler {
                 .body(ex.getMessage());
     }
 
+    @ExceptionHandler(DuplicateIdException.class)
+    public ResponseEntity<String> handleDuplicateIdException
+            (DuplicateIdException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(DuplicatedDocumentException.class)
+    public ResponseEntity<String> handleDuplicatedDocumentException
+            (DuplicatedDocumentException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
+    }
+
+
 }

@@ -12,6 +12,7 @@ The goal of the challenge is to implement an application that can:
 - Retrieve a partner by ``id``.
 - Find the nearest partner given a pair of coordinates (``lat`` / ``lon``) that lies within the partner’s coverage area.
 
+[See challenge here](https://github.com/ab-inbev-ze-company/ze-code-challenges/blob/master/backend.md)
 
 ````json
 {
@@ -44,7 +45,7 @@ The goal of the challenge is to implement an application that can:
 - JUnit
 
 ## 🌍️ Workflow
-1. A partner is created via POST /api/v1/partners.
+1. A partner is created via **POST** ``/api/v1/partners``.
 2. Partner data is persisted in PostgreSQL + PostGIS.
 3. Partners can be queried via:
    - **GET** ``/api/v1/partners/{id}`` → fetch by ID
