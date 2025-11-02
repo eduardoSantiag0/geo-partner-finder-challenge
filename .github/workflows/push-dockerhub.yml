@@ -1,12 +1,13 @@
 name: Public on Docker Hub
 
 on:
-  push:
-    branches: 
-    - main
+  workflow_run: 
+    workflows: ["Java CI with Maven"]
+    types: completed
 
 jobs:
-  build-and-push:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +24,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/geo-partner-finder:latest
+
